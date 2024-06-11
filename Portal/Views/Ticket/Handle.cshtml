@@ -1,0 +1,130 @@
+﻿@using Portal.Models.Ticket
+@model Ticket
+
+@{
+
+    ViewData["Title"] = "Handle Case";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Portal.styles.css" asp-append-version="true" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css" />
+
+</head>
+
+<body>
+    <partial name="_Toaster"></partial>
+    <h3>Case no : @Model.Id</h3>
+    <h4 id="tktstatus">Status : @Model.status</h4>
+    <h5>Time Created @Model.Created</h5>
+
+    <br />
+    <hr />
+
+    <div  class=" row h-100 d-flex align-items-center justify-content-center">
+    <div class="col-6  ">
+        <form asp-action="Handle" asp-controller="Ticket" role="form" method="post">
+            <input type="hidden" name="ticketNumber" value="@Model.Id" />
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input readonly asp-for="Title" class="form-control" class="form-control"  placeholder="Problem Title" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label > Reason for close </label>
+                    <textarea id="commentbox" asp-for="Description" class="form-control" placeholder="Add Your Update or the reason for close"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AuthorEmail"></label>
+                    <input readonly asp-for="AuthorEmail" class="form-control" class="form-control" placeholder="Enter Email" type="email" />
+                <span asp-validation-for="AuthorEmail" class="text-danger"></span>
+            </div>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AuthorMobile" class="form-label mt-4"></label>
+                    <input readonly asp-for="AuthorMobile" id="InputEmail1" class="form-control" placeholder="Enter Mobile" type="text" />
+                <span asp-validation-for="AuthorMobile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AuthorCompany" class="form-label mt-4"></label>
+                    <input readonly asp-for="AuthorCompany" class="form-control" type="text" class="form-control" placeholder="Company Name" autocomplete="off" />
+                <span asp-validation-for="AuthorCompany" class="text-danger"></span>
+            </div>
+
+                <div class="form-group">
+                    <label asp-for="status" class="form-label mt-4"></label>
+                    <input readonly asp-for="status" id="tkt_status" class="form-control" type="text" class="form-control" placeholder="Company Name" autocomplete="off" />
+                    <span asp-validation-for="status" class="text-danger"></span>
+                </div>
+
+
+            <div class="form-group">
+                <input id="btnclose" type="submit" value="Close Ticket" class="btn btn-primary   mt-2" />
+               
+
+        </form>
+    </div>
+</div>
+
+    <script>
+        let x = document.getElementById("tkt_status");
+        let tstatus = document.getElementById("tktstatus");
+        if (x.value === 'closed') {
+            document.getElementById("commentbox").style.display = "none";
+            document.getElementById("btnclose").style.display = "none";
+           
+            tstatus.innerHTML = ' The Ticket is Closed You can\'t update comment '
+            tstatus.style.color = "red"
+        }
+        else {
+        
+            document.getElementById("commentbox").style.display = "block";
+            document.getElementById("btnclose").style.display = "block";
+           
+            tstatus.style.color = "green"
+
+        }
+
+
+    </script>
+
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <!-- AdminLTE for demo purposes -->
+    <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+</body>
+
+</html>

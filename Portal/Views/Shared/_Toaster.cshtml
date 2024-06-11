@@ -1,0 +1,54 @@
+﻿﻿@if (TempData["create"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr["success"]("@TempData["create"]");
+    </script>
+}
+
+
+@if (TempData["update"] != null)
+{
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr["info"]("@TempData["update"]");
+    </script>
+}
+
+
+@if (TempData["delete"] != null)
+{
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+
+        toastr["error"]("@TempData["delete"]");
+
+    </script>
+}
+
+
+@if (TempData["comment"] != null)
+{
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+
+        toastr["error"]("@TempData["comment"]");
+
+    </script>
+}
+@if (TempData["AddaAccount"] != null)
+{
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr["info"]("@TempData["AddaAccount"]");
+    </script>
+}

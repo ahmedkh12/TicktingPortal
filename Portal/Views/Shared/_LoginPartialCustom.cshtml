@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@*If the user is signed-in display Logout link*@
+@* @if (SignInManager.IsSignedIn(User))
+{
+
+    <form method="post" asp-controller="account" asp-action="logout" class="nav-item dropdown">
+       
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@User?.Identity?.Name</a>
+            <div class="dropdown-menu">
+               
+
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="Account" asp-action="ChangePassword">
+                    Change Password
+                </a>
+            </li>
+            <button type="submit" style="width:auto"
+                    class="nav-link btn btn-link py-0">
+                Logout
+            </button>
+            </div>
+        
+        </form>
+    
+} *@
+
+    
+       @*  <a class="nav-link" asp-controller="account" asp-action="register">
+            Register
+        </a>
+     *@
+
+    
+       @*  <a class="nav-link" asp-controller="account" asp-action="login">
+            Login
+        </a>
+   *@
+
+
+
+

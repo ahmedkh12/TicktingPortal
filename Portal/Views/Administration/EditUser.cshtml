@@ -1,0 +1,61 @@
+﻿@model EditUserViewModel
+
+@{
+    Layout = "_DashboardLayout";
+    ViewBag.Title = "Edit User";
+}
+
+<h6>Edit User</h6>
+
+<div class="row">
+    <div class="col-6  ">
+        <form asp-action="EditUser" role="form" asp-controller="Administration">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" class="form-control" aria-describedby="First Name" placeholder="Enter First Name" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" class="form-control" aria-describedby="Last Name" placeholder="Enter Last Name" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Mobile"></label>
+                <input asp-for="Mobile" class="form-control" class="form-control" aria-describedby="Mobile" placeholder="Enter Mobile" type="number" />
+                <span asp-validation-for="Mobile" class="text-danger"></span>
+            </div>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="form-label mt-4" for="InputEmail1">Email address</label>
+                <input asp-for="Email" id="InputEmail1" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" type="email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Company" class="form-label mt-4"></label>
+                <input asp-for="Company" class="form-control" type="text" class="form-control" placeholder="Company Name" autocomplete="off" />
+                <span asp-validation-for="Company" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary  mt-2" />
+                <a asp-action="ListUsers" asp-controller="Administration" class="btn btn-danger   mt-2">Cancle</a>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

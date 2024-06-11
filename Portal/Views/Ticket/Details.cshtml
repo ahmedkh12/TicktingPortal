@@ -1,0 +1,239 @@
+﻿@using Portal.Models.Ticket
+@model Ticket
+
+@{
+    ViewBag.cardtitle = "Product Details";
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Portal.styles.css" asp-append-version="true" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css" />
+    <link href="node_modules/froala-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+     <partial name="_Toaster"></partial>
+
+     <button id="uploadbtn">Upload Item</button>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col"> Key  </th>
+            <th scope="col"> Value </th>
+
+        </tr>
+    </thead class="thead-dark">
+    <tbody>
+        <tr>
+            <th scope="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Id)
+                </dt>
+            </th>
+            <td>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Id)
+                </dd>
+            </td>
+
+        </tr>
+
+        <tr>
+            <th scope="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+            </th>
+            <td>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+            </td>
+        </tr>
+
+        <tr>
+            <th scope="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+            </th>
+            <td>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+            </td>
+        </tr>
+
+        <tr>
+            <th scope="row">
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.AuthorEmail)
+                </dt>
+            </th>
+            <td>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.AuthorEmail)
+                </dd>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.AuthorMobile)
+                </dt>
+            </th>
+            <td>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.AuthorMobile)
+                </dd>
+            </td>
+        </tr>
+
+        <tr>
+            <th scope="row">
+
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.AuthorCompany)
+                </dt>
+            </th>
+            <td>
+
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.AuthorCompany)
+                </dd>
+            </td>
+        </tr>
+
+        <tr>
+            <th scope="row">
+
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Created)
+                </dt>
+            </th>
+            <td>
+
+
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Created)
+                </dd>
+            </td>
+        </tr>
+
+        <tr>
+            <th scope="row">
+
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.status)
+                </dt>
+            </th>
+            <td>
+
+                <dd id="tkt_status" class="col-sm-10">
+                    @Html.DisplayFor(model => model.status)
+                </dd>
+
+            </td>
+        </tr>
+   
+</table>
+
+<div class="row">
+    <div id="update_part" class="col-6 offset-3 justify-content-center">
+
+ <form asp-action="UpdateComment" asp-controller="ticket" method="post">
+ <input type="hidden" name="ticketNumber" value="@Model.Id" />
+<textarea style="height:200px; width:660px;" name="comment"  placeholder="Write Your Update Here " class="form-control" id="textAreaExample2"   rows="3" required></textarea>
+  <button type="submit" class="btn btn-primary mt-2">Update Case</button>
+</form>
+
+</div>
+
+<div id="upload_part" class="col-6 offset-3 justify-content-center ">
+
+ <form asp-action="UploadItem" asp-controller="ticket" method="post" enctype="multipart/form-data">
+ <input type="hidden" name="ticketNumber" value="@Model.Id" />
+ <input required name="SelectedFile" type="file"/>
+  <button type="submit" class="btn btn-primary m-2">Upload File</button>
+</form>
+
+</div>
+
+
+
+</div>
+  <script>
+
+
+        let x = document.getElementById("tkt_status");
+        let upload = document.getElementById("upload_part");
+        let uploadbtn = document.getElementById("uploadbtn");
+      uploadbtn.onclick = function(){ 
+
+          if (upload.style.display == "block") {
+              upload.style.display = "none";
+          }
+          else if (upload.style.display == "none") 
+          {
+          upload.style.display = "block"
+          }
+      
+      }
+
+        document.getElementById("upload_part").style.display = "none";
+        
+        if (x.innerText === 'closed') {
+            document.getElementById("update_part").style.display = "none";
+            document.getElementById("uploadbtn").style.display = "none";
+           
+     
+        }
+        else {
+        
+            document.getElementById("update_part").style.display = "block";
+      document.getElementById("uploadbtn").style.display = "block";
+        }
+
+
+    </script>
+    <script type="text/javascript" src="node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <!-- AdminLTE for demo purposes -->
+    <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+
+</body>
+
+</html>
+

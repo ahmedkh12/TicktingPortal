@@ -1,0 +1,44 @@
+﻿@using Portal.Models.Ticket
+@model IEnumerable<Log>
+
+    @{
+    Layout = "_DashboardLayout";
+        ViewData["Title"] = "Ticket Logs";
+     }
+
+
+
+
+     <h3>Filter Logs With Ticket Number to review </h3>
+   
+        <table class="table table-striped" id="logtbl">
+            <thead>
+                <tr>
+            <th>User </th>
+            <th>Action</th>
+             <th>Case Number</th>
+            <th>Updated Content</th>
+              <th>Time</th>
+             
+       
+                </tr>
+            </thead>
+           
+        </table>
+   
+
+@section Scripts {
+    @{
+        <script type="text/javascript" src="~/js/Logs.js"></script>
+        <script src="//cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+        <script src="//cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+        <script src="//cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+        <script src="//cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+        <script src="//cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

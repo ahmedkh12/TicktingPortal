@@ -1,0 +1,146 @@
+﻿@model IEnumerable<ApplicationUser>
+
+@{
+    Layout = "_DashboardLayout";
+    ViewBag.Title = "All Users";
+}
+
+
+@if (Model.Any())
+{
+    <a asp-action="AddUser" asp-controller="Administration"
+       class="btn btn-primary mb-3" style="width:auto">
+        Add New User
+    </a>
+    <a asp-action="ListUsers" asp-controller="Administration"
+       class="btn btn-primary mb-3" style="width:auto">
+        List All
+    </a>
+
+    <form asp-controller="Administration" asp-action="ListUsers" method="get">
+        <p>
+            Search: <input type="text" name="SearchString" placeholder="UserName" />
+            <input type="submit" value="Find" />
+        </p>
+      
+    </form>
+
+   
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    User Id
+                </th>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    User Name
+                </th>
+                <th>
+                    Company
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => user.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => user.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => user.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => user.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => user.Company)
+                    </td>
+                    <td>
+
+
+
+                        <form method="post" asp-action="DeleteUser" asp-route-UserId="@user.Id">
+                            <a asp-controller="Administration" asp-action="Edituser"
+                               asp-route-UserId="@user.Id" class="btn btn-primary">Edit</a>
+
+                            <button type="button" class="btn btn-primary" onclick="resetPassword('@user.Id')">
+                                Reset Password
+                            </button>
+                            <span id="confirmDeleteSpan_@user.Id" style="display:none">
+                                <span> sure to Delete?</span>
+                                <button type="submit" class="btn btn-danger">Yes</button>
+                                <a href="#" class="btn btn-primary"
+                                   onclick="confirmDelete('@user.Id', false)">No</a>
+                            </span>
+                            <span id="deleteSpan_@user.Id">
+                                <a href="#" class="btn btn-danger"
+                                   onclick="confirmDelete('@user.Id', true)">Delete</a>
+                            </span>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No Users Added Yet
+        </div>
+
+        <div class="card-header">
+            <a asp-action="AddUser" asp-controller="Administration"
+               class="btn btn-primary mb-3" style="width:auto">
+                Add New User
+            </a>
+        </div>
+    </div>
+}
+
+<script>
+    function confirmDelete(uniqueId, isDeleteClicked) {
+        var deleteSpan = 'deleteSpan_' + uniqueId;
+        var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+        if (isDeleteClicked) {
+            $('#' + deleteSpan).hide();
+            $('#' + confirmDeleteSpan).show();
+        } else {
+            $('#' + deleteSpan).show();
+            $('#' + confirmDeleteSpan).hide();
+        }
+    }
+
+
+    function resetPassword(userId) {
+        var newPassword = prompt("Enter a new password for the user:");
+        if (newPassword) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("ResetUserPasswordFromAdmin", "Administration")",
+                data: { userId: userId, newPassword: newPassword },
+                success: function () {
+                    alert("Password reset successful!");
+                },
+                error: function () {
+                    alert("Failed to reset password.");
+                }
+            });
+        }
+    }
+
+</script>

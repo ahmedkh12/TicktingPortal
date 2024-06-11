@@ -1,0 +1,304 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Portal.styles.css" asp-append-version="true" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css" />
+  
+</head>
+<body>
+
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <!-- Left navbar links -->
+
+         
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            
+
+           
+            <div class="navbar-collapse collapse d-sm-inline-flex  flex-sm-row-reverse">
+               
+
+                <p>@User?.Identity?.Name</p><p>Welcome! &nbsp;&nbsp;&nbsp;</p>
+              
+
+            </div>
+        </nav>
+
+
+
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+            <a href="#" class="brand-link">
+                <img src="~/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">Dashboard</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                             with font-awesome or any other icon font library -->
+
+                
+
+                            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+
+                            <li class="nav-item menu-open">
+                                <a asp-action="Dashboard" asp-controller="Ticket" class="nav-link active">
+                                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                             <p>
+                                 Dashboard
+                                     <i class="right fas fa-angle-left"></i>
+                                         </p>
+                                 </a> </li>
+                            
+
+
+
+                             <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Manage Cases
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a asp-action="Index" asp-controller="Ticket" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                All Cases
+                                              
+                                            </p>
+                                        </a>
+
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a asp-action="OpenedCases" asp-controller="Ticket" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Opened Cases
+
+                                            </p>
+                                        </a>
+
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a asp-action="ClosedCases" asp-controller="Ticket" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Closed Cases
+
+                                            </p>
+                                        </a>
+
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a asp-action="LogDetails" asp-controller="Ticket" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Trace Case Logs
+                                            </p>
+                                        </a>
+
+                                    </li>
+
+                            </ul>
+
+
+                            </li>
+                            
+                            
+                             <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                     Profiles and Roles
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+
+                                <ul class="nav nav-treeview">
+
+                                    <li class="nav-item">
+                                        <a asp-action="ListUsers" asp-controller="Administration" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Manage Users
+                                            </p>
+                                        </a>
+
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a asp-action="ListRoles" asp-controller="Administration" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Manage Roles
+                                            </p>
+                                        </a>
+
+                                    </li>
+
+                                    </ul>
+                            </li>
+
+                            
+                        }
+                      
+
+
+
+
+                       
+                       
+                       
+                      
+
+                   @*      <li class="nav-item">
+                            <a asp-action="TraceMyCase" asp-controller="Ticket" class="nav-link">
+
+                                <p>
+                                    Trace Logs For My Cases
+                                </p>
+                            </a>
+
+                        </li> *@
+
+                        <li class="nav-item">
+                            <a asp-action="Create" asp-controller="Ticket" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Create Case
+                                </p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="MyTickets" asp-controller="Ticket" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                <p>
+                                    My Cases
+                                </p>
+                            </a>
+
+                        </li>
+                        
+                        <li class="nav-item">
+
+                            <form method="post" asp-controller="account" asp-action="logout">
+                                <button type="submit" style="width:auto"
+                                        class="nav-link btn btn-link py-0">
+                                    Logout
+                                </button>
+                               
+                            </form>
+
+                        </li>
+                      
+
+
+                    
+
+
+
+
+
+
+
+                       
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <partial name="_Toaster"></partial>
+            <section class="content">
+                
+                <!-- Default box -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">@ViewBag.cardtitle</h3>
+
+
+                    </div>
+
+                    <div class="card-body">
+                        @RenderBody()
+                    </div>
+                    <!-- /.card-body -->
+                    <!-- /.card-footer-->
+                </div>
+                <!-- /.card -->
+
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+
+
+
+
+
+
+
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <!-- AdminLTE for demo purposes -->
+    <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
