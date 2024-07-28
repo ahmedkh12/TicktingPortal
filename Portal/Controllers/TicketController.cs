@@ -174,6 +174,8 @@ namespace Portal.Controllers
         public async Task<IActionResult> GetMyTicketsData()
         {
             var user = await _userManager.GetUserAsync(User);
+
+            
             var mytickets = from m in _context.Tickets
                             where m.useradded == user.UserName
                             select m;
@@ -257,8 +259,8 @@ namespace Portal.Controllers
                     AddedBy = @User?.Identity?.Name
                 });
                 _context.SaveChanges();
-       
-                await _emailSender.SendEmailAsync(tkt.AuthorEmail, 
+
+                await _emailSender.SendEmailAsync(tkt.AuthorEmail,
                     $"Case {tkt.Title}",
                     $" Dears, \r\n  Your Case with title {tkt.Title} Created Successfully we will " +
                     $"Follow Up ASAP Please follow up from Portal \r\n" +

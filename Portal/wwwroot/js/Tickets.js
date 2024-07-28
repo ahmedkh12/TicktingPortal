@@ -25,8 +25,8 @@ function loaddata() {
                     return `
 
                     <button onclick="openCustomSizeWindow('/Ticket/Handle/${data}', 900, 900)" class="btn btn-primary mb-1" style="width:auto">Handle</button>
-                    <button onclick="openCustomSizeWindow('/Ticket/Details/${data}', 900, 900)" class="btn btn-info mb-1" style="width:auto">Update</button>
-                    <button onclick="openCustomSizeWindow('/Ticket/ManageAttach/${data}', 900, 900)" class="btn btn-info mb-1" style="width:auto">Attachments</button>
+                    <button onclick="openCustomSizeWindow('/Ticket/Details/${data}', 900, 900)" class="btn btn-outline-success mb-1" style="width:auto">Update</button>
+                    <button onclick="openCustomSizeWindow('/Ticket/ManageAttach/${data}', 900, 900)" class="btn btn-outline-info mb-1" style="width:auto">Attachments</button>
                     `
                 }
 

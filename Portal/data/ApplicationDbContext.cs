@@ -7,7 +7,7 @@ namespace Portal.data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
            : base(options)
         {
-
+            
         }
 
         public DbSet<ApplicationUser> ApplicationUser { get; set; } = default!;

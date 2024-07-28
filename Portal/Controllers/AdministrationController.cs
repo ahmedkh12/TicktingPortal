@@ -39,7 +39,7 @@ namespace Portal.Controllers
             {
                 users = users.Where(
 
-                    s => s.UserName.Trim().Contains(searchString.Trim())
+                s => s.UserName.Trim().Contains(searchString.Trim())
                 || s.Company.Trim().Contains(searchString.Trim())
                 || s.FirstName.Trim().Contains(searchString.Trim())
                 || s.LastName.Trim().Contains(searchString.Trim())
